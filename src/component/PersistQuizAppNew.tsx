@@ -26,7 +26,7 @@ const quizData: QuizQuestion[] = [
 
 const TOTAL_TIME = 30; // Total time for the quiz in seconds
 
-const PersistQuizApp: React.FC = () => {
+const PersistQuizAppNew: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(() => {
     return Number(localStorage.getItem("currentQuestion")) || 0;
   });
@@ -67,11 +67,21 @@ const PersistQuizApp: React.FC = () => {
     setAnswers(updatedAnswers);
   };
 
-  const handleNextQuestion = () => {
+  const handleSkipQuestion = () => {
     if (currentQuestion < quizData.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setQuizFinished(true);
+    }
+  };
+
+  const handleNextQuestion = () => {
+    if (answers[currentQuestion] !== null) {
+      if (currentQuestion < quizData.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+      } else {
+        setQuizFinished(true);
+      }
     }
   };
 
@@ -138,8 +148,15 @@ const PersistQuizApp: React.FC = () => {
         Previous
       </button>
       <button
+        className="btn btn-warning mt-3 mx-2"
+        onClick={handleSkipQuestion}
+      >
+        Skip
+      </button>
+      <button
         className="btn btn-secondary mt-3 mx-2"
         onClick={handleNextQuestion}
+        disabled={answers[currentQuestion] === null}
       >
         {currentQuestion === quizData.length - 1 ? "Finish" : "Next"}
       </button>
@@ -147,4 +164,4 @@ const PersistQuizApp: React.FC = () => {
   );
 };
 
-export default PersistQuizApp;
+export default PersistQuizAppNew;

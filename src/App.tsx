@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./component/ProtectedRoute";
 import QuizApp from "./component/QuizeApp";
 import PersistQuizApp from "./component/PersistQuizApp";
+import PersistQuizAppNew from "./component/PersistQuizAppNew";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/signup" element={<Register />} />
           <Route path="/quiz" element={<QuizApp />} />
           <Route path="/persist-quiz" element={<PersistQuizApp />} />
+          <Route path="/persist-quiz-new" element={<PersistQuizAppNew />} />
 
           {/* Protected Route for Authenticated Users */}
           <Route element={<ProtectedRoute />}>
